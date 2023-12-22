@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pvc-elastic
+spec:
+  capacity:
+    storage: 20Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: standard
+ 
+  hostPath:
+    path: "/home/maheboob/Documents/ECKonK8s/mounting"
