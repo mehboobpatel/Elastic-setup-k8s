@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 **Elastic Cloud on Kubernetes!**
 -------
 
@@ -106,3 +107,7 @@ kubectl create secret generic quickstart-es-elastic-user --from-literal=elastic=
 * cluster to story you have to manualy apply the file
 
 
+=======
+# Elastic-setup-k8s
+Elastic Cloud on kuberenetes
+>>>>>>> 8d20f7ac0a2da0b9501cde45c2d7783582a44d15
