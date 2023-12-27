@@ -11,17 +11,27 @@ spec:
       node.store.allow_mmap: false
     podTemplate:
       spec:
-        volumes:
-        - name: elasticsearch-data
-          emptyDir: {}
         containers:
         - name: elasticsearch
-          resources:
-            requests:
-              memory: "2Gi"
-              cpu: "0.5"
+          
+          # resources:     #Add this if you get any error related to resources (Not in documentation)
+          #   requests:
+          #     memory: "2Gi"
+          #     cpu: "0.5"
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 5Gi
+        #volumeMode: "Filesystem"  (Not in Documentation) add this if you using pvelastic.yml (i.e defining a PV manually)
 
 
+
+# EMPTYDIR  DATA LOSS RISK on Pod deletion
 # apiVersion: elasticsearch.k8s.elastic.co/v1
 # kind: Elasticsearch
 # metadata:
@@ -35,18 +45,15 @@ spec:
 #       node.store.allow_mmap: false
 #     podTemplate:
 #       spec:
+#         volumes:
+#         - name: elasticsearch-data
+#           emptyDir: {}
 #         containers:
 #         - name: elasticsearch
 #           resources:
 #             requests:
 #               memory: "2Gi"
 #               cpu: "0.5"
-#     volumeClaimTemplates:
-#     - metadata:
-#         name: elasticsearch-data
-#       spec:
-#         accessModes:
-#         - ReadWriteOnce
-#         resources:
-#           requests:
-#             storage: 5Gi
+
+
+

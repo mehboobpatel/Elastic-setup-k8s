@@ -106,3 +106,41 @@ kubectl create secret generic quickstart-es-elastic-user --from-literal=elastic=
 * cluster to story you have to manualy apply the file
 
 
+# PERSISTENT VOLUME 
+
+* Bydefault if you use the documentation than it gives 1gb of PV(without mentioning the PVC in the elastic.yml or without creating a PV manually in the default storage class)
+
+* lets say you want to expand the PV u can refer the documentation and add the following code 
+https://www.elastic.co/guide/en/cloud-on-k8s/current/k8s-volume-claim-templates.html
+
+* But this will throw a error if the AllowVolumeExpansion property is set to false u can check it via 
+
+```sh
+
+kubectl get sc
+```
+
+* You can create a PV Manually(20gb) check the pvelastic.yml (make sure PV contains the name 
+* starting with pvc otherwise it wont bound with pvc that will be created after u apply elastic.yml)
+```sh
+          resources:
+            requests:
+              memory: "2Gi"
+              cpu: "0.5"
+```
+
+
+* Otherwise you can directly follow the documentation of Persitent volume on ECK 
+* which will create a pv and pvc on runtime 
+
+# You can add this code if you get any error related to resources inside container definition 
+```sh
+          resources:
+            requests:
+              memory: "2Gi"
+              cpu: "0.5"
+```
+
+
+
+
